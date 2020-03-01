@@ -1,0 +1,60 @@
+from selenium import webdriver
+import pandas as pd
+from bs4 import BeautifulSoup
+#Download Selenium web driver
+#http://chromedriver.chromium.org/downloads
+#put it in same folder where your python script is saved
+#Check latest version of chrome and Selenium ChromeDriver
+driver=webdriver.Chrome("./chromedriver")
+df = pd.DataFrame(columns=["Title", "Location", "Company", "Salary", "Description"])
+for i in range(0,100,10):
+    #Step 1 : Get the page
+    driver.get("https://www.indeed.co.in/jobs?q=data+scientist&l=Pune&start="+str(i))
+
+    driver.implicitly_wait(10)
+    #Look for the div containing all jobs
+    all_jobs=driver.find_elements_by_class_name("result")
+
+
+    for job in all_jobs:
+        result_html=job.get_attribute('innerHTML')
+        soup=BeautifulSoup(result_html,'html.parser')
+        try:
+            title=soup.find("a", class_="jobtitle").text.replace('\n','')
+        except:
+            title='NA'
+        try:
+            company = soup.find(class_="company").text
+        except:
+            company = 'NA'
+        try:
+            location = soup.find(class_="location").text
+        except:
+            location = 'NA'
+        try:
+            salary = soup.find(class_="salary").text.replace('\n', '').strip()
+        except:
+            salary = 'NA'
+
+
+        sum_div=job.find_elements_by_class_name("summary")[0]
+        try:
+            sum_div.click()
+        except:
+            close_button=driver.find_element_by_class_name('popover-x-button-close')
+            close_button.click()
+            sum_div.click()
+        job_desc=driver.find_element_by_id('vjs-desc').text
+
+        df=df.append({'Title':title,'Location':location,'Company':company,"Salary":salary,"Description":job_desc},ignore_index=True)
+
+print(df)
+df.to_csv("DataScience.csv",index=False)
+# Create a Pandas Excel writer using XlsxWriter as the engine.
+writer = pd.ExcelWriter('DataScienceJobs.xlsx', engine='xlsxwriter')
+
+# Convert the dataframe to an XlsxWriter Excel object.
+df.to_excel(writer, sheet_name='Sheet1')
+
+# Close the Pandas Excel writer and output the Excel file.
+writer.save()
