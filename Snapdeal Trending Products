@@ -1,0 +1,22 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+page = requests.get("https://www.snapdeal.com/")
+print(page)
+print(page.status_code)
+#print(page.content)
+soup = BeautifulSoup(page.content, 'html.parser')
+#print(soup.prettify())
+
+products=[] #List to store name of the product
+prices=[] #List to store name of the product
+
+for a in soup.findAll('div',attrs={'class':'trendingProd product-relative dp-widget-link col-xs-5 favDp'}):
+    #print("Inside for loop")
+    name=a.find('div', attrs={'class':'product_name'})
+    price = a.find('span', attrs={'class': 'mrp'})
+    products.append(name.text)
+    prices.append(price.text)
+
+df = pd.DataFrame({'Product Name':products,'Price':prices})
+print(df)
