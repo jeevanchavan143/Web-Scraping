@@ -17,6 +17,8 @@ To extract data using web scraping with python,you need to follow these basic st
 1.Find the URL that you want to scrape
 
 2.Check wheather is it legal to scrap from that website
+Goto www.URL/robots.txt 
+if you are using Scrapy you no need to worry because it automatically allow only Legal links
 
 3.Inspecting the Website
 
