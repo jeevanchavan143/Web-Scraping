@@ -1,9 +1,12 @@
 # Web-Scraping
-
+Web scraping is a very powerful tool to learn for any data professional. With web scraping the entire internet becomes your database. In this repository how to parse a web page into a data file (csv) using a Python package called BeautifulSoup
 Two ways to extract data from a website:
+
 1.Use the API of the website (Best way)
 The data on the websites are unstructured,
+
 Sadly, not all websites provide an API
+
 2.Web Scraping:
 Web scraping is an automated method used to extract useful information from the websites 
 focuses on the transformation of unstructured data (HTML format) on the web into structured data.
@@ -12,11 +15,17 @@ STEPS:
 To extract data using web scraping with python,you need to follow these basic steps:
 
 1.Find the URL that you want to scrape
+
 2.Check wheather is it legal to scrap from that website
+
 3.Inspecting the Website
+
 4.Find the data you want to extract
+
 5.Write the code
+
 6.Run the code and extract the data
+
 7.Store the data in the required format
 
 
