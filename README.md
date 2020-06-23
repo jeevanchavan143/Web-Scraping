@@ -1,4 +1,5 @@
 # Web-Scraping
+https://medium.com/@jeevanchavan143/web-scraping-extract-any-data-in-5-minutes-67c8ec01d704
 Web scraping is a very powerful tool to learn for any data professional. With web scraping the entire internet becomes your database. In this repository how to parse a web page into a data file (csv) using a Python package called BeautifulSoup
 Two ways to extract data from a website:
 
